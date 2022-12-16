@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "copying configuration from /boot..."
+        mkdir /tmp/boot
+        mount /dev/mmcblk0p1 /tmp/boot
+        cp /tmp/boot/wpa_supplicant.conf /etc/wpa_supplicant.conf
+        cp /tmp/boot/interfaces /etc/network/interfaces
+        mkdir -p /root/.ssh
+        cp /tmp/boot/authorized_keys /root/.ssh/authorized_keys
+        echo -e $(cat /tmp/boot/password)"\n"$(cat /tmp/boot/password) | passwd
+        ;;
+    *)
+        echo "Usage: $0 {start}"
+        exit 1
+esac
+
+exit $?
