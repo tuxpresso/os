@@ -10,11 +10,25 @@ Tuxpresso provides a defconfig based on the Raspberry Pi Zero W.
 
 This should produce a file, `buildroot/output/image/sdcard.img`, which can be written to an SD card for a Raspbery Pi Zero W.
 
-Tuxpresso will start `boilerd` with sane defaults for the reference configuration.
+To configure Tuxpresso wifi, write the file "wpa\_supplicant.conf" to the SD card
 
-The Pi will broadcast a wifi network with the SSID "tuxpresso", and password "tuxpresso".
-Its IP address will default to 192.168.0.1/16.
-You can connect to the Pi via SSH, username "root", password "root".
+    update_config=1
+    country=US
+
+    network={
+        ssid="mywifi"
+        psk="mypassword"
+    }
+    
+Note that the Raspberry Pi Zero W can only connect to 2.4 GHz wifi networks.
+
+To set the root password, write the file "password.txt" to the SD card
+
+    mypassword
+
+You can connect to the Pi via SSH, username "root".
+
+Tuxpresso will start `boilerd` with sane defaults for the reference configuration.
 
 ## Reference configuration
 * Raspberry Pi Zero W
