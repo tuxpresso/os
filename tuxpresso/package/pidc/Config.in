@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PIDC
+    bool "pidc"
+    help
+      A pid controller library
+
+      https://github.com/ahepp/pidc

@@ -1,0 +1,5 @@
+config BR2_PACKAGE_TUXPRESSO_BOILERD
+    bool "tuxpresso-boilerd"
+    depends on BR2_PACKAGE_PIDC
+    help
+      Boiler control service for tuxpresso
