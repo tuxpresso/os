@@ -17,7 +17,7 @@ case "$1" in
         echo $GPIO > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio$GPIO/direction
 
-        boilerd -g $GPIO -i $IIO -sp 1632 -kp 64 -ki 1 -kd 0 &
+        boilerd -g $GPIO -i $IIO -sp 1632 -kp 64 -ki 1 -kd 0 2>> /var/log/boilerd &
         ;;
     *)
         echo "Usage: $0 {start}"
