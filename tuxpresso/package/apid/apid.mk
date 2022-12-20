@@ -1,0 +1,6 @@
+APID_VERSION = bc8264524213892776075186d800a7e1c22e5cbd
+APID_SITE = $(call github,tuxpresso,apid,$(APID_VERSION))
+APID_LICENSE = GPL-2.0
+APID_LICENSE_FILES = COPYING
+
+$(eval $(cargo-package))

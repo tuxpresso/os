@@ -28,6 +28,8 @@ case "$1" in
             -kd 0 \
             -max 2000 \
             2>> /var/log/boilerd &
+
+        apid &
         ;;
     *)
         echo "Usage: $0 {start}"
