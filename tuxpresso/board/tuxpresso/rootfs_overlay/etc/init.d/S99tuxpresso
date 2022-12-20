@@ -20,6 +20,8 @@ case "$1" in
         boilerd \
             -g $GPIO \
             -i $IIO \
+            -h 127.0.0.1 \
+            -p 5555 \
             -sp 1632 \
             -kp 64 \
             -ki 1 \
