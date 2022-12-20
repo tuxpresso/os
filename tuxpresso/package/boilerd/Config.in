@@ -1,5 +1,5 @@
-config BR2_PACKAGE_TUXPRESSO_BOILERD
-    bool "tuxpresso-boilerd"
+config BR2_PACKAGE_BOILERD
+    bool "boilerd"
     depends on BR2_PACKAGE_PIDC
     help
       Boiler control service for tuxpresso
