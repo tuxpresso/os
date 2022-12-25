@@ -1,4 +1,6 @@
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/apid/Config.in"
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/boilerd/Config.in"
+source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/ctrld/Config.in"
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/mcp9600/Config.in"
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/pidc/Config.in"
+source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/pwmd/Config.in"
