@@ -17,19 +17,23 @@ case "$1" in
         echo $GPIO > /sys/class/gpio/export
         echo out > /sys/class/gpio/gpio$GPIO/direction
 
-        boilerd \
-            -g $GPIO \
-            -i $IIO \
-            -h 127.0.0.1 \
-            -p 5555 \
-            -sp 1632 \
-            -kp 64 \
-            -ki 1 \
-            -kd 0 \
-            -max 2000 \
-            2>> /var/log/boilerd &
+        pwmd \
+            -g "/sys/class/gpio/gpio$GPIO/value" \
+            -p 1000 \
+            -m 32 \
+            -b 127.0.0.1:5555 \
+            2>&1 >> /var/log/pwmd &
 
-        apid &
+        ctrld \
+            -i "/sys/bus/iio/devices/iio:device$IIO/in_temp_raw" \
+            -p 1000 \
+            -a 127.0.0.1:5555 \
+            --max 1800 \
+            --sp 1632 \
+            --kp 1 \
+            --ki .25 \
+            --kd 0 \
+            2>&1 >> /var/log/ctrld &
         ;;
     *)
         echo "Usage: $0 {start}"
