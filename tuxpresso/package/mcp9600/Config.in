@@ -1,0 +1,5 @@
+config BR2_PACKAGE_MCP9600
+    bool "mcp9600"
+    depends on BR2_LINUX_KERNEL
+    help
+      A driver for the MCP9600 thermocouple EMF converter
