@@ -1,20 +1,38 @@
 pipeline {
-  agent {
-    dockerfile {
-      filename '.ci/Dockerfile'
-      args '-v ${WORKSPACE}:/ws'
-    }
-  }
+  agent none
   stages {
-    stage('Configure') {
+    stage('Build') {
+      agent {
+        dockerfile {
+          filename '.ci/Dockerfile'
+          args '-v ${WORKSPACE}:/ws'
+        }
+      }
       steps {
         sh 'make -C /ws/buildroot distclean'
         sh 'make -C /ws/buildroot BR2_EXTERNAL=/ws/tuxpresso tuxpresso_defconfig'
+        sh 'make -C /ws/buildroot'
       }
     }
-    stage('Build') {
+    stage('Deploy') {
+      agent {
+        dockerfile {
+          filename '.ci/Dockerfile.deploy'
+          args '-v ${WORKSPACE}:/ws'
+        }
+      }
       steps {
-        sh 'make -C /ws/buildroot'
+        withCredentials([usernamePassword(credentialsId: 'jenkins-s3-creds',
+            usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+          sh '''
+            /ws/.ci/deploy.sh \
+              $TUXPRESSO_S3_HOST \
+              $USER \
+              $PASS \
+              /ws/buildroot/output/images/sdcard.img \
+              /$TUXPRESSO_S3_BUCKET/tuxpresso-$(git describe)+b$BUILD_NUMBER.img
+          '''
+        }
       }
     }
   }
