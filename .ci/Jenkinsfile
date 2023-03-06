@@ -1,6 +1,7 @@
 pipeline {
   agent {
     dockerfile {
+      filename '.ci/Dockerfile'
       args '-v ${WORKSPACE}:/ws'
     }
   }
