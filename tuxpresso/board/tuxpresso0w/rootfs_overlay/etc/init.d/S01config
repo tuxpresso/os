@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        mount /dev/mmcblk0p1 /mnt
+        cp /mnt/wpa_supplicant.conf /etc/wpa_supplicant.conf
+        umount /mnt
+        ;;
+    *)
+        echo "Usage: $0 {start}"
+        exit 1
+esac
+
+exit $?
