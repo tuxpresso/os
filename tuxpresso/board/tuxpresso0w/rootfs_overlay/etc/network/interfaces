@@ -5,4 +5,5 @@ auto wlan0
 iface wlan0 inet dhcp
     udhcpc_opts -x hostname:$(hostname)
     pre-up wpa_supplicant -D nl80211 -i wlan0 -c /etc/wpa_supplicant.conf -B
+    pre-up iw wlan0 set power_save off
     post-down killall -q wpa_supplicant
