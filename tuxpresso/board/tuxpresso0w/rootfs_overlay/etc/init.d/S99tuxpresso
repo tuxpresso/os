@@ -1,0 +1,41 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "starting tuxpresso..."
+
+        GPIO=17
+        IIO=0
+
+        # Initialize the IIO temperature sensor
+        modprobe mcp9600
+        echo mcp9600 0x60 > /sys/class/i2c-adapter/i2c-1/new_device
+
+        # Initialize the boiler GPIO
+        echo $GPIO > /sys/class/gpio/export
+        echo out > /sys/class/gpio/gpio$GPIO/direction
+
+        pwmd \
+            -g "/sys/class/gpio/gpio$GPIO/value" \
+            -p 1000 \
+            -m 32 \
+            -b 127.0.0.1:5555 \
+            2>&1 >> /var/log/pwmd &
+
+        ctrld \
+            -i "/sys/bus/iio/devices/iio:device$IIO/in_temp_raw" \
+            -p 1000 \
+            -a 127.0.0.1:5555 \
+            --max 1800 \
+            --sp 1632 \
+            --kp 1 \
+            --ki .25 \
+            --kd 0 \
+            2>&1 >> /var/log/ctrld &
+        ;;
+    *)
+        echo "Usage: $0 {start}"
+        exit 1
+esac
+
+exit $?
