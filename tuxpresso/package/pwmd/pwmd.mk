@@ -1,0 +1,6 @@
+PWMD_VERSION = d77ca993cdc32557845126d28ad1f471d24e9679
+PWMD_SITE = $(call github,tuxpresso,pwmd,$(PWMD_VERSION))
+PWMD_LICENSE = GPL-2.0
+PWMD_LICENSE_FILES = COPYING
+
+$(eval $(cargo-package))

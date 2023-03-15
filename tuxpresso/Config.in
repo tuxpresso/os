@@ -1,2 +1,3 @@
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/ctrld/Config.in"
 source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/mcp9600/Config.in"
+source "$BR2_EXTERNAL_TUXPRESSO_PATH/package/pwmd/Config.in"
