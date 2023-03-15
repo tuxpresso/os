@@ -12,6 +12,7 @@ RUN apt-get update \
         ca-certificates \
         cpio \
         file \
+        git \
         libncurses-dev \
         rsync \
         unzip \
