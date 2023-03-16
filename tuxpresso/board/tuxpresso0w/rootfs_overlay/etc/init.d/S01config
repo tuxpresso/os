@@ -4,6 +4,8 @@ case "$1" in
     start)
         mount /dev/mmcblk0p1 /mnt
         cp /mnt/wpa_supplicant.conf /etc/wpa_supplicant.conf
+        mkdir -p /root/.ssh
+        cp /mnt/authorized_keys /root/.ssh/authorized_keys
         umount /mnt
         ;;
     *)
